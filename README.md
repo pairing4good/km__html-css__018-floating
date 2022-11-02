@@ -1,12 +1,14 @@
-# 017 Position
+# 018 Floating
 
-[![017 Position](https://img.youtube.com/vi/GcYIhcridMM/0.jpg)](https://www.youtube.com/watch?v=GcYIhcridMM)
+[![018 Floating](https://img.youtube.com/vi/NalLy4pQS2c/0.jpg)](https://www.youtube.com/watch?v=NalLy4pQS2c)
 
 The `index.html` file
-- should style `relative` class to have a relative position
-- should style `fixed` class to have a fixed position
-- should style `absolute` class to have an absolute position
+- should style `left` class to display to the left with the text wrapping around the image
+- should style `right` class to display to the right with the text wrapping around the image
+- should style `default` class to display on the same side that the body that is set in the `style.css`
+- should style `below` class to display below the image
 
 Resources:
-- https://www.w3schools.com/css/css_positioning.asp
+- https://www.w3schools.com/css/css_float.asp
+
 

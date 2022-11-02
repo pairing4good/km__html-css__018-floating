@@ -17,7 +17,7 @@ beforeAll(async () => {
       res.writeHead(200);
       res.end(data);
     });
-  });
+  });  
 
   server.listen(process.env.PORT || 3000);
 });
@@ -36,36 +36,47 @@ afterEach(async () => {
   await browser.close();
 });
 
-describe('the relative class', () => {
-  it('should have a relative position', async () => {
-    const position = await page.$eval('div[class="relative"]', (div) => {
+describe('the left class', () => {
+  it('should display to the left with the text wrapping around the image', async () => {
+    const float = await page.$eval('div[class="left"]', (div) => {
       let style = window.getComputedStyle(div);
-      return style.getPropertyValue('position');
+      return style.getPropertyValue('float');
     });
     
-    expect(position).toBe('relative');
+    expect(float).toBe("left");
   });
 });
 
-describe('the fixed class', () => {
-  it('should have a fixed position', async () => {
-    const position = await page.$eval('div[class="fixed"]', (div) => {
+describe('the right class', () => {
+  it('should display to the right with the text wrapping around the image', async () => {
+    const float = await page.$eval('div[class="right"]', (div) => {
       let style = window.getComputedStyle(div);
-      return style.getPropertyValue('position');
+      return style.getPropertyValue('float');
     });
     
-    expect(position).toBe('fixed');
+    expect(float).toBe("right");
   });
 });
 
-describe('the absolute class', () => {
-  it('should have an absolute position', async () => {
-    const position = await page.$eval('div[class="absolute"]', (div) => {
-      let style = window.getComputedStyle(div);
-      return style.getPropertyValue('position');
+describe('the default class', () => {
+  it('should display on the same side that the body that is set in the style.css', async () => {
+    const letiableDefinitionCount = await page.$eval('style', (style) => {
+      return style.innerHTML.match(/\.default.*{[\s\S][^}]*float:.*inherit;/g).length;
     });
-      
-    expect(position).toBe('absolute');
+    
+    expect(letiableDefinitionCount).toEqual(1);
   });
 });
 
+describe('the below class', () => {
+  it('should display below the image', async () => {
+    const clear = await page.$eval('div[class="below"]', (div) => {
+      let style = window.getComputedStyle(div);
+      return style.getPropertyValue('clear')
+    });
+    
+    let setToBoth = clear === 'both';
+    let setToLeft = clear === 'left';
+    expect(setToBoth || setToLeft).toBe(true);
+  });
+});
